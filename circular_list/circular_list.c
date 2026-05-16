@@ -71,6 +71,28 @@ void insertAtEnd(int data) {
     return;
 
 }
+
+int countNode() {
+
+    struct cir_list_node *curr = head;
+
+    if(head == NULL) {
+        printf("List is Empty");
+        return -1;
+    }
+
+    int count = 0;
+
+    do {
+        curr = curr->next;
+        count++;
+    } while(curr != head);
+
+    return count;
+
+
+}
+
 void display() {
     struct cir_list_node *curr = head;
 
@@ -101,5 +123,8 @@ int main() {
     insertAtFront(3);
     insertAtFront(2);
     display();
+    printf("Total Number of Nodes = %d", countNode());
+
+    return 0;
     
 }
