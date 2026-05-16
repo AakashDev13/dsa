@@ -9,6 +9,38 @@ struct cir_list_node {
 
 struct cir_list_node *head = NULL;
 
+void insertAtFront(int data) {
+
+    struct cir_list_node *curr = head;
+    struct cir_list_node *newNode;
+    newNode = (struct cir_list_node *)malloc(sizeof(struct cir_list_node));
+
+    newNode->data = data;
+    newNode->next = newNode;
+
+    if(!newNode) {
+        printf("Memory Errorr");
+        return;
+    }
+
+    if(head == NULL) {
+        head = newNode;
+        head->next = head;
+        return;
+    }
+
+    while(curr->next != head) {
+        curr = curr->next;
+    }
+
+    curr->next = newNode;
+    newNode->next = head;
+    head = newNode;
+
+    return;
+
+}
+
 void insertAtEnd(int data) {
     
     struct cir_list_node *curr = head;
@@ -51,6 +83,8 @@ void display() {
         printf("%d ", curr->data);
         curr = curr->next;
     } while(curr != head);
+
+    printf("\n");
 }
 
 
@@ -62,4 +96,10 @@ int main() {
     insertAtEnd(50);
     insertAtEnd(60);
     display();
+    insertAtFront(5);
+    insertAtFront(4);
+    insertAtFront(3);
+    insertAtFront(2);
+    display();
+    
 }
