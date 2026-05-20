@@ -93,6 +93,44 @@ int countNode() {
 
 }
 
+void deleteFrist() {
+    
+    struct cir_list_node *temp, *curr;
+    curr = temp = head;
+
+    if(!head) {printf("Can't be deleted"); return;}
+
+    while(curr->next != head) {
+        curr = curr->next;
+    }
+    curr->next = head->next;
+    head = head->next;
+    temp->next = NULL;
+
+    printf("Item %d is deleted!\n", temp->data);
+    free(temp);
+    return;
+
+}
+
+void deleteEnd() {
+
+    struct cir_list_node *curr, *temp;
+    temp = curr = head;
+    
+    if(head == NULL) {printf("Can't be deleted"); return;}
+
+    while(curr->next != head) {
+        temp = curr;
+        curr = curr->next;
+    }
+
+    temp->next = head;
+    printf("Item %d deleted\n", curr->data);   
+    free(curr);
+    return;
+}
+
 void display() {
     struct cir_list_node *curr = head;
 
@@ -118,10 +156,9 @@ int main() {
     insertAtEnd(50);
     insertAtEnd(60);
     display();
-    insertAtFront(5);
-    insertAtFront(4);
-    insertAtFront(3);
-    insertAtFront(2);
+    deleteFrist();
+    display();
+    deleteEnd();
     display();
     printf("Total Number of Nodes = %d", countNode());
 
