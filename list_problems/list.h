@@ -10,9 +10,9 @@ struct ListNode {
     struct ListNode *next;
 };
 
-struct ListNode *head = NULL;
+// struct ListNode *head = NULL;
 
-void insertAtBegnning(int data) {
+void insertAtBegnning(struct ListNode **head, int data) {
 
     struct ListNode *temp;
     temp = (struct ListNode*)malloc(sizeof(struct ListNode));
@@ -20,25 +20,28 @@ void insertAtBegnning(int data) {
     temp->next = NULL;
 
     if(temp == NULL) {
-        head = temp;
-        head->next = NULL;
+        printf("List is empty");
         return;
     }
 
-    temp->next = head;
-    head = temp;
+    temp->next = *head;
+    *head = temp;
 
 }
 
-void insertAtEnd(int data) {
-    struct ListNode *temp , *curr = head;
+void insertAtEnd(struct ListNode **head, int data) {
+    struct ListNode *temp , *curr = *head;
     temp = (struct ListNode *)malloc(sizeof(struct ListNode));
     temp->data = data;
     temp->next = NULL;
 
+    if(temp == NULL) {
+        printf("Memory error");
+        return;
+    }
+
     if(curr == NULL) {
-        head = temp;
-        head->next == NULL;
+        *head = temp;
         return;
     }
 
@@ -48,7 +51,7 @@ void insertAtEnd(int data) {
     curr->next = temp;
 }
 
-int sizeoflist() {
+int sizeoflist(struct ListNode *head) {
     struct ListNode *curr = head;
     int count = 0;
     while(curr != NULL) {
@@ -58,7 +61,7 @@ int sizeoflist() {
     return count;
 }
 
-void insertAtGivenPos(int data, int pos) {
+void insertAtGivenPos(struct ListNode **head,  int data, int pos) {
     
     struct ListNode *temp;
     temp = (struct ListNode *)malloc(sizeof(struct ListNode));
@@ -66,18 +69,17 @@ void insertAtGivenPos(int data, int pos) {
     temp->next = NULL;
 
 
-    if(head == NULL ) {
-        head = temp;
-        head->next = NULL;
+    if(*head == NULL ) {
+        printf("List is empty");
         return;
     }
 
     int i = 0;
-    struct ListNode *curr = head, *prev = NULL;
+    struct ListNode *curr = *head, *prev = NULL;
 
     if(pos == 0) {
-        temp->next = head;
-        head = temp;
+        temp->next = *head;
+        *head = temp;
         return;
     }
 
@@ -88,7 +90,7 @@ void insertAtGivenPos(int data, int pos) {
     }
 
     if(curr == NULL || pos < 0) {
-        printf("\nInvalid index Try Between %d and %d \n", 0 , sizeoflist());
+        printf("\nInvalid index Try Between %d and %d \n", 0 , sizeoflist(*head));
         return;
     }
 
@@ -97,30 +99,35 @@ void insertAtGivenPos(int data, int pos) {
 
 }
 
-void deleteAtBignning() {
+void deleteAtBignning(struct ListNode **head) {
 
-    if(head == NULL) {
+    if(*head == NULL) {
         printf("List is Empty");
         return;
     }
-    struct ListNode *temp = head;
-    head = head->next;
+    struct ListNode *temp = *head;
+    *head = (*head)->next;
     free(temp);
     return;
 }
 
-// Deleting node from End of list
-void deleteAtEnd() {
-
-}
 
 // Deleting node at end
-void deleteAtGivenPos(int pos) {
-    if(head == NULL) {
+void deleteAtGivenPos(struct ListNode **head, int pos) {
+    if(*head == NULL) {
         printf("List is Empty");
     }
-    struct ListNode *prev = NULL, *curr = head;
+    struct ListNode *prev = NULL, *curr = *head;
     int i = 0;
+
+    if(pos == 0) {
+        struct ListNode *temp = *head;
+        *head = (*head)->next;
+        free(temp);
+        return;
+    }
+   
+
     while(i < pos && curr != NULL) {
         prev = curr;
         curr = curr->next;
@@ -137,7 +144,7 @@ void deleteAtGivenPos(int pos) {
 }
 
 
-void displayList() {
+void displayList(struct ListNode *head) {
 
     struct ListNode *temp = head;
 
