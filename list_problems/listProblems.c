@@ -18,6 +18,42 @@
 
 */
 
+// 2. middle node of linked list 
+
+// using toggle boolean method
+struct ListNode *middleNodeToggle(struct ListNode *head) {
+    struct ListNode *temp = head;
+    struct ListNode *mid = head;
+    
+    int count = 0;
+
+    while(temp != NULL) {
+        if(count % 2 == 1) {
+            mid = mid->next;
+        }
+        count++;
+        temp = temp->next;
+    }
+    return mid;
+}
+
+// slow and fast pointer method
+
+struct ListNode *middleNode(struct ListNode *head) {
+
+    struct ListNode *fast = head;
+    struct ListNode *slow = head;
+
+    while(fast != NULL && fast->next != NULL) {
+
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    return slow;
+}
+
+
+
 
 // reverse using look and 3 pointer
 void reverseList(struct ListNode **head) {
@@ -67,9 +103,17 @@ int main() {
     insertAtEnd(&List2, 6);
 
     displayList(List1);
+    displayList(List2);
+    struct ListNode *mid = middleNode(List2);
+    printf("Middle Element of List = %d\n", mid->data);
+
+
+
+
+
     // displayList(List2);
-    reverseListR(NULL, List1, &List1);
-    displayList(List1);
+    // reverseListR(NULL, List1, &List1);
+    // displayList(List1);
 
     // reverseList(&List1);
     // reverseList(&List2);
