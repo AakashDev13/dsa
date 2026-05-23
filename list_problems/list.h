@@ -143,6 +143,32 @@ void deleteAtGivenPos(struct ListNode **head, int pos) {
     return;
 }
 
+struct ListNode *createUsingArr(int arr[], int size) {
+
+    struct ListNode *temp  = NULL;
+    struct ListNode *head = NULL;
+    struct ListNode *last = NULL;
+
+    if(size == 0) {return NULL;}
+
+    for(int i = 0; i < size; i++) {
+
+        temp = (struct ListNode*)malloc(sizeof(struct ListNode));
+
+        temp->data = arr[i];
+        temp->next = NULL;
+
+        if(head == NULL) {
+            head = temp;
+            last = temp;
+        } else {
+            last->next = temp;
+            last = temp;
+        }
+    }
+    return head;
+}
+
 
 void displayList(struct ListNode *head) {
 

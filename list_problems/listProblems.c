@@ -87,29 +87,33 @@ void reverseListR(struct ListNode *q , struct ListNode *p , struct ListNode **he
 
 int main() {
 
-    struct ListNode *List1 = NULL;
-    struct ListNode *List2 = NULL;
 
-    insertAtEnd(&List1, 10);
-    insertAtEnd(&List1, 20);
-    insertAtEnd(&List1, 30);
-    insertAtEnd(&List1, 40);
-    insertAtEnd(&List1, 50);
-    insertAtEnd(&List2, 1);
-    insertAtEnd(&List2, 2);
-    insertAtEnd(&List2, 3);
-    insertAtEnd(&List2, 4);
-    insertAtEnd(&List2, 5);
-    insertAtEnd(&List2, 6);
+    int arr[] = {10, 20, 30 , 40 , 50};
+    int size = sizeof(arr)/ sizeof(arr[0]);
 
-    displayList(List1);
-    displayList(List2);
-    struct ListNode *mid = middleNode(List2);
-    printf("Middle Element of List = %d\n", mid->data);
+    struct ListNode *head = createUsingArr(arr, size);
 
+    displayList(head);
 
+    // struct ListNode *List1 = NULL;
+    // struct ListNode *List2 = NULL;
 
+    // insertAtEnd(&List1, 10);
+    // insertAtEnd(&List1, 20);
+    // insertAtEnd(&List1, 30);
+    // insertAtEnd(&List1, 40);
+    // insertAtEnd(&List1, 50);
+    // insertAtEnd(&List2, 1);
+    // insertAtEnd(&List2, 2);
+    // insertAtEnd(&List2, 3);
+    // insertAtEnd(&List2, 4);
+    // insertAtEnd(&List2, 5);
+    // insertAtEnd(&List2, 6);
 
+    // displayList(List1);
+    // displayList(List2);
+    // struct ListNode *mid = middleNode(List2);
+    // printf("Middle Element of List = %d\n", mid->data);
 
     // displayList(List2);
     // reverseListR(NULL, List1, &List1);
