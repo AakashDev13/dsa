@@ -18,6 +18,38 @@
 
 */
 
+// 4. Detect Loop Using slow and fast pointer
+
+int isLoop2(struct ListNode *head) {
+
+    struct ListNode *slow ,*fast;
+    slow = fast = head;
+    
+    do{
+        slow = slow->next;
+        fast = fast->next;
+        fast = fast ? fast->next : fast;
+
+
+    }while(fast && slow && fast != slow);
+
+    if(slow == fast) {return 1;}
+    else return 0;
+}
+
+int isLoop(struct ListNode *head) {
+    struct ListNode *slow = head;
+    struct ListNode *fast = head;
+
+    while(fast != NULL && fast->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+
+        if(slow == fast) {return 1;}
+    }     
+    return 0;
+}
+
 // 2. middle node of linked list 
 
 // using toggle boolean method
@@ -93,7 +125,22 @@ int main() {
 
     struct ListNode *head = createUsingArr(arr, size);
 
+    // create loop
+    struct ListNode *t1 = head->next;
+    struct ListNode *t2 = head->next->next->next->next;
+    t2->next = t1;
+
+    if(isLoop(head)) {
+        printf("LOOP EXIST!!");
+        return 0;
+    }else {
+        printf("LOOP NOT EXIST!\n");
+        displayList(head);
+    }
     displayList(head);
+    
+    // struct ListNode *mid = middleNode(head);
+    // printf("Middle Node of List is = %d \n", mid->data);
 
     // struct ListNode *List1 = NULL;
     // struct ListNode *List2 = NULL;
