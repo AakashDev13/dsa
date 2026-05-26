@@ -23,45 +23,49 @@
 // 5. Merge Two sorted lists
 
 struct ListNode *mergeTwoSortedList(struct ListNode *head, struct ListNode *head1) {
-    
+
     if(head == NULL) return head1;
     if(head1 == NULL) return head;
+
 
     struct ListNode *newHead = NULL;
     struct ListNode *temp = NULL;
 
-    // select first node
-
-    if(head->data <= head1->data)  {
+    // Select first Node
+    if(head->data <= head1->data) {
         newHead = head;
         head = head->next;
-    } else {
+        // temp = newHead;
+    }
+    else {
         newHead = head1;
         head1 = head1->next;
+        // temp = newHead;
     }
-
+    
     temp = newHead;
 
+    // Merge List
+    while(head != NULL && head1 != NULL) {
 
-    // Merge 
-    while(head && head1) {
-        
         if(head->data <= head1->data) {
-            temp->next = head;
-            head = head->next;
+           temp->next = head;
+           head = head->next;
+        //    temp = temp->next;
         } else {
             temp->next = head1;
             head1 = head1->next;
+            // temp = temp->next;
         }
-
         temp = temp->next;
+
     }
 
-    // Attach Remaining Nodes
-
+    // Attach remaning node
     if(head) {
         temp->next = head;
-    } else {
+    }
+    else {
         temp->next = head1;
     }
 
