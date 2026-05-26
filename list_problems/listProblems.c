@@ -9,7 +9,7 @@
 2.Reverse LL -> done
 3.Middle Node
 4.Detect Loop
-5.Merge Lists
+5.Merge Two Sorted Lists
 6.Palindrome
 7.K-Reverse
 8.Intersection
@@ -17,6 +17,54 @@
 10.LRU Cache
 
 */
+
+// 5. Merge Two sorted lists
+
+struct ListNode *mergeList(struct ListNode *head, struct ListNode *head1) {
+    
+    if(head == NULL) return head1;
+    if(head1 == NULL) return head;
+
+    struct ListNode *newHead = NULL;
+    struct ListNode *temp = NULL;
+
+    // select first node
+
+    if(head->data <= head1->data)  {
+        newHead = head;
+        head = head->next;
+    } else {
+        newHead = head1;
+        head1 = head1->next;
+    }
+
+    temp = newHead;
+
+
+    // Merge 
+    while(head && head1) {
+        
+        if(head->data <= head1->data) {
+            temp->next = head;
+            head = head->next;
+        } else {
+            temp->next = head1;
+            head1 = head1->next;
+        }
+
+        temp = temp->next;
+    }
+
+    // Attach Remaining Nodes
+
+    if(head) {
+        temp->next = head;
+    } else {
+        temp->next = head1;
+    }
+
+    return newHead;
+}
 
 // 4. Detect Loop Using slow and fast pointer
 
@@ -120,16 +168,28 @@ void reverseListR(struct ListNode *q , struct ListNode *p , struct ListNode **he
 int main() {
 
 
-    int arr[] = {10, 20, 30 , 40 , 50};
+    int arr[] = {1, 4, 6, 9, 10, 32, 45, 67};
+    int arr1[] = {2, 5, 12, 14, 15};
     int size = sizeof(arr)/ sizeof(arr[0]);
 
     struct ListNode *head = createUsingArr(arr, size);
+    displayList(head);
+
+    struct ListNode *head1 = createUsingArr(arr1, size);
+    displayList(head1);
+
+
+    printf("List after merge!\n");
+    struct ListNode *marge = mergeList(head, head1);
+    displayList(marge);
+
 
     // create loop
+    /*
     struct ListNode *t1 = head->next;
     struct ListNode *t2 = head->next->next->next->next;
     t2->next = t1;
-
+    
     if(isLoop(head)) {
         printf("LOOP EXIST!!");
         return 0;
@@ -138,10 +198,11 @@ int main() {
         displayList(head);
     }
     displayList(head);
+    */
     
     // struct ListNode *mid = middleNode(head);
     // printf("Middle Node of List is = %d \n", mid->data);
-
+    
     // struct ListNode *List1 = NULL;
     // struct ListNode *List2 = NULL;
 
