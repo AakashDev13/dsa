@@ -7,9 +7,9 @@
 ------Problems-------
 1.Insert/Delete -> done
 2.Reverse LL -> done
-3.Middle Node
-4.Detect Loop
-5.Merge Two Sorted Lists
+3.Middle Node ->done
+4.Detect Loop ->done
+5.Merge Two Sorted Lists ->done
 6.Palindrome
 7.K-Reverse
 8.Intersection
