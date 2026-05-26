@@ -18,9 +18,11 @@
 
 */
 
+
+
 // 5. Merge Two sorted lists
 
-struct ListNode *mergeList(struct ListNode *head, struct ListNode *head1) {
+struct ListNode *mergeTwoSortedList(struct ListNode *head, struct ListNode *head1) {
     
     if(head == NULL) return head1;
     if(head1 == NULL) return head;
@@ -171,16 +173,17 @@ int main() {
     int arr[] = {1, 4, 6, 9, 10, 32, 45, 67};
     int arr1[] = {2, 5, 12, 14, 15};
     int size = sizeof(arr)/ sizeof(arr[0]);
+    int size1 = sizeof(arr1)/ sizeof(arr[0]);
 
     struct ListNode *head = createUsingArr(arr, size);
     displayList(head);
 
-    struct ListNode *head1 = createUsingArr(arr1, size);
+    struct ListNode *head1 = createUsingArr(arr1, size1);
     displayList(head1);
 
 
     printf("List after merge!\n");
-    struct ListNode *marge = mergeList(head, head1);
+    struct ListNode *marge = mergeTwoSortedList(head, head1);
     displayList(marge);
 
 
