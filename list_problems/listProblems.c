@@ -18,6 +18,59 @@
 
 */
 
+// 6. check Palindrome
+
+
+struct ListNode * reverse(struct ListNode *head) {
+
+    struct ListNode *p = head;
+    struct ListNode *q = NULL;
+    struct ListNode *r = NULL;
+
+
+    while(p != NULL) {
+       r = q;
+       q = p;
+       p = p->next;
+
+       q->next = r;
+
+
+    }
+
+    return q;
+}
+
+// using slow and fast pointer method
+int isPalindrome(struct ListNode *head) {
+    
+    struct ListNode *fast, *slow;
+    fast = slow = head;
+
+    while(fast->next != NULL && fast->next->next != NULL) {
+        fast = fast->next->next;
+        slow = slow->next;
+    }
+
+    // reverse secondHalf 
+    struct ListNode *secondHalf = reverse(slow->next);
+    struct ListNode *firstHalf = head;
+
+
+    // check palindrom;
+
+    while(secondHalf != NULL) {
+
+        if(firstHalf->data != secondHalf->data) 
+            return 0;
+
+        firstHalf = firstHalf->next;
+        secondHalf = secondHalf->next;
+    }
+    return 1;
+}
+
+
 
 
 // 5. Merge Two sorted lists
@@ -155,7 +208,7 @@ void reverseList(struct ListNode **head) {
     }
     *head = q;
 
-    printf("List is Reversed!\n");
+    // printf("List is Reversed!\n");
 
 }
 
@@ -174,7 +227,7 @@ void reverseListR(struct ListNode *q , struct ListNode *p , struct ListNode **he
 int main() {
 
 
-    int arr[] = {1, 4, 6, 9, 10, 32, 45, 67};
+    int arr[] = {1, 4, 6, 4, 1};
     int arr1[] = {2, 5, 12, 14, 15};
     int size = sizeof(arr)/ sizeof(arr[0]);
     int size1 = sizeof(arr1)/ sizeof(arr[0]);
@@ -182,14 +235,15 @@ int main() {
     struct ListNode *head = createUsingArr(arr, size);
     displayList(head);
 
-    struct ListNode *head1 = createUsingArr(arr1, size1);
-    displayList(head1);
-
-
-    printf("List after merge!\n");
-    struct ListNode *marge = mergeTwoSortedList(head, head1);
-    displayList(marge);
-
+    // struct ListNode *head1 = createUsingArr(arr1, size1);
+    // displayList(head1);
+    
+    isPalindrome(head) ? printf("List is palindrome!") : printf("List is Not Palindrome!");
+    
+    // printf("List after merge!\n");
+    // struct ListNode *marge = mergeTwoSortedList(head, head1);
+    // displayList(marge);
+    
 
     // create loop
     /*
@@ -200,21 +254,21 @@ int main() {
     if(isLoop(head)) {
         printf("LOOP EXIST!!");
         return 0;
-    }else {
-        printf("LOOP NOT EXIST!\n");
-        displayList(head);
-    }
-    displayList(head);
-    */
-    
-    // struct ListNode *mid = middleNode(head);
-    // printf("Middle Node of List is = %d \n", mid->data);
-    
-    // struct ListNode *List1 = NULL;
-    // struct ListNode *List2 = NULL;
-
-    // insertAtEnd(&List1, 10);
-    // insertAtEnd(&List1, 20);
+        }else {
+            printf("LOOP NOT EXIST!\n");
+            displayList(head);
+            }
+            displayList(head);
+            */
+           
+           // struct ListNode *mid = middleNode(head);
+           // printf("Middle Node of List is = %d \n", mid->data);
+           
+           // struct ListNode *List1 = NULL;
+           // struct ListNode *List2 = NULL;
+           
+           // insertAtEnd(&List1, 10);
+           // insertAtEnd(&List1, 20);
     // insertAtEnd(&List1, 30);
     // insertAtEnd(&List1, 40);
     // insertAtEnd(&List1, 50);
