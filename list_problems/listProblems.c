@@ -10,16 +10,41 @@
 3.Middle Node ->done
 4.Detect Loop ->done
 5.Merge Two Sorted Lists ->done
-6.Palindrome
-7.K-Reverse
+6.Palindrome -> done
+7.Reverse Node in k-Group
 8.Intersection
 9.Random Pointer Copy
 10.LRU Cache
 
 */
 
-// 6. check Palindrome
+//Reverse node in k-groups
 
+struct ListNode *reverseKgroup(struct ListNode *head, int k) {
+    struct ListNode *temp = head;
+    struct ListNode *curr = NULL;
+    struct ListNode *prev = NULL;
+
+    int i = 0; 
+
+   
+    curr = head;
+
+    
+    while(i <= k) {
+        i++;
+        prev = curr;
+        curr = curr->next;
+         prev->next = NULL;
+        reverse(head);
+        prev->next = curr;
+        head = curr;
+    }
+   return head;
+
+}
+
+// 6. check Palindrome
 
 struct ListNode * reverse(struct ListNode *head) {
 
@@ -227,7 +252,7 @@ void reverseListR(struct ListNode *q , struct ListNode *p , struct ListNode **he
 int main() {
 
 
-    int arr[] = {1, 4, 6, 4, 1};
+    int arr[] = {1, 2, 3, 4, 5, 6, 7};
     int arr1[] = {2, 5, 12, 14, 15};
     int size = sizeof(arr)/ sizeof(arr[0]);
     int size1 = sizeof(arr1)/ sizeof(arr[0]);
@@ -239,6 +264,9 @@ int main() {
     // displayList(head1);
     
     isPalindrome(head) ? printf("List is palindrome!") : printf("List is Not Palindrome!");
+
+    struct ListNode *reverseKlist = reverseKgroup(arr, 3)
+    displayList(reverseKlist);
     
     // printf("List after merge!\n");
     // struct ListNode *marge = mergeTwoSortedList(head, head1);
