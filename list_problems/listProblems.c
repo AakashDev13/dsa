@@ -11,10 +11,6 @@
 4.Detect Loop ->done
 5.Merge Two Sorted Lists ->done
 6.Palindrome -> done
-7.Reverse Node in k-Group
-8.Intersection
-9.Random Pointer Copy
-10.LRU Cache
 
 */
 
