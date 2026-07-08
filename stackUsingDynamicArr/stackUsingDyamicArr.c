@@ -1,19 +1,25 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-typedef struct 
+struct Stack
 {
     int *arr;
     int top;
     int size;
 };
 
-typedef struct Stack;
+void *push(struct Stack s, int value) {
 
-struct *createStack(int size) {
+    if(s->top == size-1) {
+        printf("Stack overflow!!");
+        return NULL;
+    }
+}
+
+struct Stack *createStack(int size) {
 
     // Allocation memory for stack
-    Stack *stack = (Stack *)malloc(sizeof(Stack));
+    struct Stack *stack = (struct Stack *)malloc(sizeof(struct Stack));
 
     if(stack == NULL) {
         printf("Error in Memory Allocation!");
@@ -39,8 +45,20 @@ int main() {
     
     int size;
     printf("Enter size of Stack! ");
-    scanf("%d", size);
-    Stack *s = createStack(size);
+    scanf("%d", &size);
+
+    struct Stack *s = createStack(size);
+
+    if(s == NULL) {
+        return 1;
+    }
+
+    printf("Stack is created successfully\n");
+    printf("Size : %d\n",s->size);
+    printf("Top : %d\n", s->top);
+
+    free(s->arr);
+    free(s);
 
 
 }
