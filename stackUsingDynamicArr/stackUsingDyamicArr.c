@@ -8,12 +8,50 @@ struct Stack
     int size;
 };
 
-void *push(struct Stack s, int value) {
-
-    if(s->top == size-1) {
-        printf("Stack overflow!!");
-        return NULL;
+int isEmpty(struct Stack *s) {
+    if(s->top == -1) {
+        return 1;
+    } else {
+        return 0;
     }
+}
+
+int isFull(struct Stack *s) {
+    if(s->top == s->size - 1) {
+        return 1;
+    }else {
+        return 0;
+    }
+}
+void display(struct Stack *s) {
+    
+    if(s->top == -1) {
+        printf("Stack is underflow!!");
+        return;
+    }
+    for(int i = s->top; i >= 0; i--) {
+        printf("%d ", s->arr[i]);
+    }
+}
+
+void pop(struct Stack *s) {
+
+
+    if(s->top == -1) {
+        printf("Stack is underFlow");
+        return;
+    }
+    s->top--;
+} 
+
+void push(struct Stack *s, int value) {
+
+    if(s->top == s->size - 1) {
+        printf("Stack overflow!!");
+        return;
+    }
+    s->top++;
+    s->arr[s->top] = value;
 }
 
 struct Stack *createStack(int size) {
@@ -54,8 +92,19 @@ int main() {
     }
 
     printf("Stack is created successfully\n");
+    printf("%d\n", isEmpty(s));
+    printf("%d\n", isFull(s));
+    push(s, 8);
+    push(s, 12);
+    push(s, 16);
+    pop(s);
+    pop(s);
+    push(s, 20);
+    push(s, 34);
     printf("Size : %d\n",s->size);
     printf("Top : %d\n", s->top);
+
+    display(s);
 
     free(s->arr);
     free(s);
